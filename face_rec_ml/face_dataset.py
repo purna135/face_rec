@@ -21,7 +21,7 @@ print("\n[INFO] Initializing face capture...")
 # Initialize individual sampling face count
 count = 0
 
-while(True):
+while True:
 
     ret, img = cam.read()
     img = cv2.flip(img, 1) # flip video image vertically
@@ -29,19 +29,16 @@ while(True):
     faces = face_detector.detectMultiScale(gray, 1.3, 5)
 
     for (x,y,w,h) in faces:
-        cv2.rectangle(img, (x,y), (x+w,y+h), (255,0,0), 2)     
+        cv2.rectangle(img, (x,y), (x+w,y+h), (255,0,0), 2)
         count += 1
 
         # Save the captured image into the datasets folder
-        cv2.imwrite("{}/{}.{}.{}{}".format(path,face_name, face_id, count, ".jpg"), gray[y:y+h,x:x+w])
+        cv2.imwrite(f"{path}/{face_name}.{face_id}.{count}.jpg", gray[y:y+h,x:x+w])
         cv2.imshow('image', img)
 
     k = cv2.waitKey(100) & 0xff # Press 'ESC' for exiting video
-    if k == 27:
+    if k == 27 or count >= 30:
         break
-    elif count >= 30: # Take 30 face sample and stop video
-         break
-
 print("\n[INFO] Exiting Program...")
 cam.release()
 cv2.destroyAllWindows()

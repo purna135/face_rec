@@ -37,7 +37,7 @@ def face_rec():
 
 		# Find all the faces and face encodings in the current frame of video
 		face_locations = face_recognition.face_locations(output)
-		print("Found {} faces in image.".format(len(face_locations)))
+		print(f"Found {len(face_locations)} faces in image.")
 		face_encodings = face_recognition.face_encodings(output, face_locations)
 
 		# Loop over each face found in the frame to see if it's someone we know.
@@ -52,7 +52,7 @@ def face_rec():
 			else:
 				t = threading.Thread(target=send_mail)
 				t.start()
-			print("I see someone named {}!".format(name))
+			print(f"I see someone named {name}!")
 			
 			
 			
